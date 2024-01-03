@@ -21,6 +21,8 @@ const connectionDB = () => __awaiter(void 0, void 0, void 0, function* () {
             throw new Error("La variable de entorno MONGODB_URI no está definida.");
         }
         const options = {
+            useUnifiedTopology: true,
+            useNewUrlParser: true,
             socketTimeoutMS: 30000,
             connectTimeoutMS: 30000,
         };

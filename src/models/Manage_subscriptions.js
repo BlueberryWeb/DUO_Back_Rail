@@ -18,11 +18,11 @@ const Manage_Subscriptions = new mongoose_1.Schema({
         required: [true, 'This field is required'],
     },
     start: {
-        type: String,
+        type: Date,
         required: [true, 'This field is required'],
     },
     end: {
-        type: Date, // Cambiado a Date en lugar de String
+        type: Date,
         required: [true, 'This field is required'],
     },
     user: {

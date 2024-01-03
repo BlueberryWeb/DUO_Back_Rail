@@ -53,8 +53,8 @@ const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
         user.stripeCustomerId = stripeCustumer.id;
         user.save();
+        let billindId;
         if (bill == 'Si') {
-            console.log(bill);
             const result = yield (0, s3Services_1.uploadFile)(req.file);
             const billing = yield new Billing_1.default();
             billing.name = business_name;
@@ -75,10 +75,11 @@ const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             billing.user = user.id;
             console.log(billing);
             billing.save();
+            billindId = billing.id;
             console.log(result);
         }
         const session = yield stripe.checkout.sessions.create({
-            success_url: 'https://WWW.DUO.ZONE',
+            success_url: `https://pay.duo.zone/inicio?user=${user.id}&billing=${billindId}`,
             cancel_url: 'https://WWW.DUO.ZONE',
             customer: stripeCustumer.id,
             line_items: [
