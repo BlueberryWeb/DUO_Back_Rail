@@ -16,16 +16,16 @@ exports.addUser = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const s3Services_1 = require("../middleware/s3Services");
 const Billing_1 = __importDefault(require("../models/Billing"));
-const user_1 = __importDefault(require("../models/user"));
+const User_1 = __importDefault(require("../models/User"));
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email, phoneNumber, password, last_name, bussiness_name, billing_email, billing_phone, street, ext_no, int_no, Colonia, Municipio, State, CFDI, Regimen, rfc, cp, bill, product, Payments } = req.body;
     try {
-        const userOld = yield user_1.default.findOne({ email: email });
+        const userOld = yield User_1.default.findOne({ email: email });
         if (userOld) {
             return res.json({ status: 201, error: 'Usuario registrado si ya tienes un usuario registrado con este correo inicia sesion en DUO' });
         }
-        const user = yield new user_1.default();
+        const user = yield new User_1.default();
         user.name = name;
         user.lastname = last_name;
         user.email = email;

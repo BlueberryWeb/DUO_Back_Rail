@@ -15,12 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const passport_1 = __importDefault(require("passport"));
 const passport_local_1 = require("passport-local");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
-const user_1 = __importDefault(require("../../models/user"));
+const User_1 = __importDefault(require("../../models/User"));
 class PassportConfig {
     initializePassport() {
         passport_1.default.use(new passport_local_1.Strategy((username, password, done) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const user = yield user_1.default.findOne({ email: username });
+                const user = yield User_1.default.findOne({ email: username });
                 if (!user) {
                     return done(null, false, { message: 'Usuario no encontrado. Verifica tu correo electrónico e intentalo de nuevo.' });
                 }
@@ -52,11 +52,11 @@ class PassportConfig {
         });
         passport_1.default.deserializeUser((id, done) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const user = yield user_1.default.findById(id);
+                const user = yield User_1.default.findById(id);
                 if (!user) {
                     return done(null, false);
                 }
-                const fullUser = yield user_1.default.findUser(user.email);
+                const fullUser = yield User_1.default.findUser(user.email);
                 if (!fullUser) {
                     return done(null, false);
                 }

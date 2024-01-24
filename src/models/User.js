@@ -97,4 +97,4 @@ UserSchema.statics.findUser = function (email) {
 };
 const User = (0, mongoose_1.model)('User', UserSchema);
 exports.default = User;
-//# sourceMappingURL=user.js.map
+//# sourceMappingURL=User.js.map

@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateTokenUser = exports.logout = exports.authenticateUser = void 0;
 const passport_1 = __importDefault(require("passport"));
 const newToken_1 = require("../helpers/newToken");
-const user_1 = __importDefault(require("../models/user"));
+const User_1 = __importDefault(require("../models/User"));
 const authenticateUser = () => {
     return (req, res, next) => {
         passport_1.default.authenticate('local', (err, user, info) => __awaiter(void 0, void 0, void 0, function* () {
@@ -30,7 +30,7 @@ const authenticateUser = () => {
                     return res.status(401).json({ error: errorMessage });
                 }
                 // const userWithAdditionalInfo = await User.findOne({ email: user.email }).select('-password') as UserProps;
-                const userWithAdditionalInfo = yield user_1.default.findUser(user.email);
+                const userWithAdditionalInfo = yield User_1.default.findUser(user.email);
                 req.logIn(userWithAdditionalInfo, (err) => __awaiter(void 0, void 0, void 0, function* () {
                     if (err) {
                         console.error(err);

@@ -14,12 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateJWT = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const user_1 = __importDefault(require("../models/user"));
+const User_1 = __importDefault(require("../models/User"));
 const generateJWT = (uid = '') => {
     return new Promise((resolve, reject) => __awaiter(void 0, void 0, void 0, function* () {
         const payload = { uid: uid || '' };
         try {
-            const user = yield user_1.default.findById(uid);
+            const user = yield User_1.default.findById(uid);
             if (!user) {
                 reject('User not found.');
                 return;
