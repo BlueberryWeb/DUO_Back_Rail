@@ -18,7 +18,6 @@ const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const express_session_1 = __importDefault(require("express-session"));
 const path_1 = __importDefault(require("path"));
-// import PassportConfig from '../middleware/Auth/authConfig'
 const passport_1 = __importDefault(require("passport"));
 const config_1 = require("../database/config");
 const authConfig_1 = __importDefault(require("../middleware/Auth/authConfig"));
@@ -27,10 +26,11 @@ class Server {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '8000';
         this.paths = {
-            health: '/',
             login: '/api/login',
             users: '/api/users',
             payments: '/api/payments',
+            profiles: '/api/profiles',
+            health: '/api/health',
         };
         this.dbConnection();
         this.middleware();
@@ -52,6 +52,7 @@ class Server {
         this.app.use(this.paths.users, require('../routes/user'));
         this.app.use(this.paths.payments, require('../routes/payment'));
         this.app.use(this.paths.health, require('../routes/health'));
+        this.app.use(this.paths.profiles, require('../routes/profiles'));
     }
     middleware() {
         this.app.use((0, cors_1.default)());
@@ -70,7 +71,7 @@ class Server {
             cookie: {
                 secure: process.env.NODE_ENV === 'production',
                 httpOnly: true,
-                maxAge: 3600000,
+                maxAge: 365 * 24 * 60 * 60 * 1000,
                 sameSite: 'none',
             }
         }));
@@ -85,4 +86,4 @@ class Server {
     }
 }
 exports.Server = Server;
-//# sourceMappingURL=Server.js.map
+//# sourceMappingURL=server.js.map

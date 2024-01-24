@@ -12,36 +12,32 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
-const Manage_Subscriptions = new mongoose_1.Schema({
-    status: {
+const SponsorSchema = new mongoose_1.Schema({
+    name: {
         type: String,
         required: [true, 'This field is required'],
     },
-    type: {
+    lastname: {
+        type: String,
+        required: false,
+    },
+    email: {
         type: String,
         required: [true, 'This field is required'],
+        unique: true,
     },
-    start: {
-        type: Date,
+    phoneNumber: {
+        type: String,
         required: [true, 'This field is required'],
-    },
-    end: {
-        type: Date,
-        required: [true, 'This field is required'],
-    },
-    user: {
-        type: mongoose_1.Schema.ObjectId,
-        ref: "User",
-        required: true
     }
 }, {
     timestamps: true,
 });
-Manage_Subscriptions.methods.toJSON = function () {
-    const _a = this.toObject(), { __v, _id } = _a, manage_detail = __rest(_a, ["__v", "_id"]);
-    manage_detail.uid = _id;
-    return manage_detail;
+SponsorSchema.methods.toJSON = function () {
+    const _a = this.toObject(), { __v, password, _id } = _a, user = __rest(_a, ["__v", "password", "_id"]);
+    user.uid = _id;
+    return user;
 };
-const Manage_Subscription = (0, mongoose_1.model)('Manage_Subscription', Manage_Subscriptions);
-exports.default = Manage_Subscription;
-//# sourceMappingURL=Manage_subscriptions.js.map
+const Sponsor = (0, mongoose_1.model)('Sponsor', SponsorSchema);
+exports.default = Sponsor;
+//# sourceMappingURL=Sponsor.js.map

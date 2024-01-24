@@ -23,14 +23,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
-const authController = __importStar(require("../controllers/loginController"));
-const authToken_1 = require("../middleware/Auth/authToken");
-const router = (0, express_1.Router)();
-router.get('/auth', authController.validateTokenUser);
-router.get('/logout', [
-    authToken_1.validToken
-], authController.logout);
-router.post('/auth-user', authController.authenticateUser());
-module.exports = router;
-//# sourceMappingURL=login.js.map
+exports.GenerateRandomsCode = void 0;
+const crypto = __importStar(require("crypto"));
+const GenerateRandomsCode = (longitud) => {
+    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let codigo = '';
+    for (let i = 0; i < longitud; i++) {
+        const indice = crypto.randomInt(caracteres.length);
+        codigo += caracteres.charAt(indice);
+    }
+    return codigo;
+};
+exports.GenerateRandomsCode = GenerateRandomsCode;
+//# sourceMappingURL=random-order.js.map

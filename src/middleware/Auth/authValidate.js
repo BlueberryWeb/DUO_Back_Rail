@@ -5,7 +5,14 @@ const isAuthenticated = (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
     }
-    res.render('login');
+    else {
+        return res.json({
+            status: 401,
+            message: 'Usuario con sesión no autorizada.'
+        });
+    }
+    // Redirect to a login view (web only)
+    // res.render('login');
 };
 exports.isAuthenticated = isAuthenticated;
 //# sourceMappingURL=authValidate.js.map

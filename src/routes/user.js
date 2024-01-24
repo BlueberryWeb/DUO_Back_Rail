@@ -9,7 +9,6 @@ const multer_1 = __importDefault(require("multer"));
 const router = (0, express_1.Router)();
 const storage = multer_1.default.memoryStorage();
 const upload = (0, multer_1.default)({ storage: storage });
-router.get('/user', usersController_1.findUser);
 router.post('/add_user', upload.single('document'), usersController_1.addUser);
 // router.post('/save-user', saveUser);
 // router.patch('/update-user/:id', updateUser);
