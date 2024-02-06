@@ -17,11 +17,11 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const express_session_1 = __importDefault(require("express-session"));
-const path_1 = __importDefault(require("path"));
+const connect_mongo_1 = __importDefault(require("connect-mongo"));
 const passport_1 = __importDefault(require("passport"));
+const path_1 = __importDefault(require("path"));
 const config_1 = require("../database/config");
 const authConfig_1 = __importDefault(require("../middleware/Auth/authConfig"));
-const connect_mongo_1 = __importDefault(require("connect-mongo"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -70,10 +70,11 @@ class Server {
         this.app.use((0, express_session_1.default)({
             secret: process.env.SECRETORPRIVATEKEY,
             resave: true,
-            saveUninitialized: true,
+            saveUninitialized: false,
             store: connect_mongo_1.default.create({
                 mongoUrl: process.env.MONGODB_URI,
-                ttl: 365 * 24 * 60 * 60 * 1000
+                ttl: 365 * 24 * 60 * 60 * 1000,
+                autoRemove: 'disabled',
             }),
             cookie: {
                 secure: process.env.NODE_ENV === 'production',
@@ -93,4 +94,4 @@ class Server {
     }
 }
 exports.Server = Server;
-//# sourceMappingURL=Server.js.map
+//# sourceMappingURL=server.js.map

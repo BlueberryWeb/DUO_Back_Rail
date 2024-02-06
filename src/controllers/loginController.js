@@ -49,6 +49,7 @@ const authenticateUser = () => {
 };
 exports.authenticateUser = authenticateUser;
 const logout = (req, res) => {
+    console.log(req.sessionID);
     try {
         req.logout((err) => {
             if (err) {
@@ -57,7 +58,16 @@ const logout = (req, res) => {
                     message: err
                 });
             }
-            res.json({ status: 200, message: 'Sesión finalizada' });
+            req.session.destroy((err) => {
+                if (err) {
+                    res.json({
+                        status: 500,
+                        message: 'Error al eliminar la sesión',
+                        devTool: err
+                    });
+                }
+                res.json({ status: 200, message: 'Sesión finalizada' });
+            });
         });
     }
     catch (passportError) {

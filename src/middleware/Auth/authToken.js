@@ -17,6 +17,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const User_1 = __importDefault(require("../../models/User"));
 const validToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const token = req.header('auth-token');
+    console.log(token);
     if (!token) {
         return res.json({
             status: 401,
