@@ -79,6 +79,7 @@ const logout = (req, res) => {
 exports.logout = logout;
 const validateTokenUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log(req.user);
         if (!req.user) {
             // console.log('object')
             return res.json({
