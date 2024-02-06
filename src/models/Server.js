@@ -93,4 +93,4 @@ class Server {
     }
 }
 exports.Server = Server;
-//# sourceMappingURL=server.js.map
+//# sourceMappingURL=Server.js.map
