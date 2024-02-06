@@ -42,14 +42,6 @@ class PassportConfig {
                 done(new Error('Usuario inválido para la serialización'));
             }
         });
-        passport_1.default.serializeUser((user, done) => {
-            if (user && user.uid) {
-                done(null, user.uid);
-            }
-            else {
-                done(new Error('Usuario inválido para la serialización'));
-            }
-        });
         passport_1.default.deserializeUser((id, done) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const user = yield User_1.default.findById(id);
