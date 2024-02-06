@@ -44,6 +44,7 @@ class PassportConfig {
         });
         passport_1.default.deserializeUser((id, done) => __awaiter(this, void 0, void 0, function* () {
             try {
+                console.log(id);
                 const user = yield User_1.default.findById(id);
                 if (!user) {
                     return done(null, false);
