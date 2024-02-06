@@ -86,7 +86,6 @@ class Server {
         this.app.use(passport_1.default.initialize());
         this.app.use(passport_1.default.session());
         authConfig_1.default.initializePassport();
-        console.log(authConfig_1.default.initializePassport());
     }
     listen() {
         this.app.listen(this.port, () => {

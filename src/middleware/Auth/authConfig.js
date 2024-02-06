@@ -46,6 +46,7 @@ class PassportConfig {
             }
         });
         passport_1.default.deserializeUser((id, done) => __awaiter(this, void 0, void 0, function* () {
+            console.log('entrando deserializeUser');
             try {
                 const user = yield User_1.default.findById(id);
                 if (!user) {
@@ -61,6 +62,7 @@ class PassportConfig {
                 return done(null, fullUser);
             }
             catch (error) {
+                console.log('error catch:', error);
                 return done(error);
             }
         }));
