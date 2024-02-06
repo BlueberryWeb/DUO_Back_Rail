@@ -35,24 +35,29 @@ class PassportConfig {
             }
         })));
         passport_1.default.serializeUser((user, done) => {
+            console.log('entrando');
             if (user && user.uid) {
+                console.log('success');
                 done(null, user.uid);
             }
             else {
+                console.log('error');
                 done(new Error('Usuario inválido para la serialización'));
             }
         });
         passport_1.default.deserializeUser((id, done) => __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log({ id: id });
                 const user = yield User_1.default.findById(id);
                 if (!user) {
+                    console.log('error');
                     return done(null, false);
                 }
                 const fullUser = yield User_1.default.findUser(user.email);
                 if (!fullUser) {
+                    console.log('no user...');
                     return done(null, false);
                 }
+                console.log('deserialize user...');
                 return done(null, fullUser);
             }
             catch (error) {
