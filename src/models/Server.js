@@ -90,7 +90,7 @@ class Server {
     listen() {
         this.app.listen(this.port, () => {
             console.log(`Server up on ${this.port}`);
-            console.log(process.env.NODE_ENV);
+            console.log(process.env.NODE_ENV === 'production');
         });
     }
 }
