@@ -21,6 +21,7 @@ const path_1 = __importDefault(require("path"));
 const passport_1 = __importDefault(require("passport"));
 const config_1 = require("../database/config");
 const authConfig_1 = __importDefault(require("../middleware/Auth/authConfig"));
+const connect_mongo_1 = __importDefault(require("connect-mongo"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -70,6 +71,10 @@ class Server {
             secret: process.env.SECRETORPRIVATEKEY,
             resave: true,
             saveUninitialized: true,
+            store: connect_mongo_1.default.create({
+                mongoUrl: process.env.MONGODB_URI,
+                ttl: 365 * 24 * 60 * 60 * 1000
+            }),
             cookie: {
                 secure: process.env.NODE_ENV === 'production',
                 httpOnly: true,
@@ -88,4 +93,4 @@ class Server {
     }
 }
 exports.Server = Server;
-//# sourceMappingURL=Server.js.map
+//# sourceMappingURL=server.js.map
