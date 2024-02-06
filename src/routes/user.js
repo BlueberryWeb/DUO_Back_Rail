@@ -9,9 +9,8 @@ const multer_1 = __importDefault(require("multer"));
 const router = (0, express_1.Router)();
 const storage = multer_1.default.memoryStorage();
 const upload = (0, multer_1.default)({ storage: storage });
+router.post('/find-user-by-email', usersController_1.findUserByEmail);
 router.post('/add_user', upload.single('document'), usersController_1.addUser);
-// router.post('/save-user', saveUser);
-// router.patch('/update-user/:id', updateUser);
-// router.delete('/remove-user/:id', removeUser);
-module.exports = router;
+router.patch('/update-password', usersController_1.updatePassword),
+    module.exports = router;
 //# sourceMappingURL=user.js.map

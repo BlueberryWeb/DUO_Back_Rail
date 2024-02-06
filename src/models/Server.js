@@ -31,6 +31,7 @@ class Server {
             payments: '/api/payments',
             profiles: '/api/profiles',
             health: '/api/health',
+            sponsors: '/api/sponsors',
         };
         this.dbConnection();
         this.middleware();
@@ -53,6 +54,7 @@ class Server {
         this.app.use(this.paths.payments, require('../routes/payment'));
         this.app.use(this.paths.health, require('../routes/health'));
         this.app.use(this.paths.profiles, require('../routes/profiles'));
+        this.app.use(this.paths.sponsors, require('../routes/sponsor'));
     }
     middleware() {
         this.app.use((0, cors_1.default)());

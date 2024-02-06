@@ -55,11 +55,20 @@ const UserSchema = new mongoose_1.Schema({
     timestamps: true,
 });
 UserSchema.methods.toJSON = function () {
-    const _a = this.toObject(), { __v, password, _id } = _a, user = __rest(_a, ["__v", "password", "_id"]);
+    const _a = this.toObject(), { __v, _id } = _a, user = __rest(_a, ["__v", "_id"]);
     user.uid = _id;
     return user;
 };
 // Scopes //
+UserSchema.statics.findByEmail = function (email) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const user = yield this.findOne({ email: email });
+        if (!user) {
+            return { status: 404 };
+        }
+        return { status: 200 };
+    });
+};
 UserSchema.statics.findUser = function (email) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = yield this.aggregate([

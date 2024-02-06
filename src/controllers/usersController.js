@@ -12,12 +12,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addUser = void 0;
+exports.updatePassword = exports.addUser = exports.findUserByEmail = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const s3Services_1 = require("../middleware/s3Services");
 const Billing_1 = __importDefault(require("../models/Billing"));
 const User_1 = __importDefault(require("../models/User"));
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const findUserByEmail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email } = req.body;
+    try {
+        const data = yield User_1.default.findByEmail(email);
+        if (!data) {
+            return res.json({
+                status: 400,
+                message: 'Usuario no encontrado. Verifique el correo electrónico y e intentolo de nuevo'
+            });
+        }
+        res.json(data);
+    }
+    catch (error) {
+        res.json({
+            status: 500,
+            message: 'Error interno del servidor',
+            devTool: error.message
+        });
+    }
+});
+exports.findUserByEmail = findUserByEmail;
 const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email, phoneNumber, password, last_name, bussiness_name, billing_email, billing_phone, street, ext_no, int_no, Colonia, Municipio, State, CFDI, Regimen, rfc, cp, bill, product, Payments } = req.body;
     try {
@@ -85,7 +106,6 @@ const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         else if (Payments === 'Paypal') {
             return res.json({ success: 200, payment: 'Paypal', id_user: user.id, billindId: bill });
         }
-        // return res.json(session.url);
     }
     catch (error) {
         console.error(error);
@@ -93,4 +113,29 @@ const addUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.addUser = addUser;
+const updatePassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { email, password } = req.body;
+        console.log(email);
+        const user = yield User_1.default.findOne({ email });
+        if (!user) {
+            return res.json({
+                status: 404,
+                message: 'Usuario no encontrado'
+            });
+        }
+        const newPassword = bcryptjs_1.default.hashSync(password, bcryptjs_1.default.genSaltSync());
+        user.password = newPassword;
+        yield user.save();
+        res.json({
+            status: 202,
+            message: 'Contraseña actualizada'
+        });
+    }
+    catch (error) {
+        res.status(500).json({ status: 500, message: 'Error interno del servidor', devTool: error.message });
+        console.log(error);
+    }
+});
+exports.updatePassword = updatePassword;
 //# sourceMappingURL=usersController.js.map
