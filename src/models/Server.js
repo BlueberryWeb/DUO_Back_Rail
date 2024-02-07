@@ -25,7 +25,7 @@ const authConfig_1 = __importDefault(require("../middleware/Auth/authConfig"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
-        this.port = '8000';
+        this.port = process.env.PORT || '8000';
         this.paths = {
             login: '/api/login',
             users: '/api/users',
