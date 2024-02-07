@@ -78,7 +78,7 @@ class Server {
             }),
             cookie: {
                 secure: process.env.NODE_ENV === 'production',
-                httpOnly: true,
+                httpOnly: false,
                 maxAge: 365 * 24 * 60 * 60 * 1000,
                 sameSite: 'none',
             }
