@@ -28,8 +28,6 @@ class PassportConfig {
                 if (!isPasswordMatch) {
                     return done(null, false, { message: 'Contraseña incorrecta. Verifica tu contraseña e intentalo de nuevo.' });
                 }
-                console.log('Utenticated');
-                console.log(JSON.stringify(user, null, 2));
                 return done(null, user);
             }
             catch (error) {
@@ -38,7 +36,6 @@ class PassportConfig {
         })));
         passport_1.default.serializeUser((user, done) => {
             if (user && user.uid) {
-                console.log('Serialize user...');
                 done(null, user.uid);
             }
             else {
@@ -47,21 +44,17 @@ class PassportConfig {
         });
         passport_1.default.deserializeUser((id, done) => __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log('deserialize user...');
                 const user = yield User_1.default.findById(id);
                 if (!user) {
-                    console.log('Error. No user');
                     return done(null, false);
                 }
                 const fullUser = yield User_1.default.findUser(user.email);
                 if (!fullUser) {
-                    console.log('Error. No full user');
                     return done(null, false);
                 }
                 return done(null, fullUser);
             }
             catch (error) {
-                console.log(`Catch exeption: ${error.message}`);
                 return done(error);
             }
         }));
