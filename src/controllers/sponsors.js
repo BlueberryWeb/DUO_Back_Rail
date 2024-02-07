@@ -17,7 +17,6 @@ const Sponsor_1 = __importDefault(require("../models/Sponsor"));
 const addSponsors = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const existingSponsor = yield Sponsor_1.default.findOne({ email: req.body.email });
-        console.log(existingSponsor);
         if (existingSponsor) {
             return res.status(400).json({ error: 'El email del patrocinador ya está registrado, por favor espera un correo para completar tu registro.' });
         }

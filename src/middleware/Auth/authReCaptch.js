@@ -16,7 +16,6 @@ exports.ReCaptcha = void 0;
 const axios_1 = __importDefault(require("axios"));
 const ReCaptcha = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { value } = req.body;
-    // console.log(process.env.RECATPCHA_PRIVATE_KEY)
     const url = `https://recaptchaenterprise.googleapis.com/v1/projects/duotest-1704923020844/assessments?key=${process.env.RECAPTCHA_API_KEY}`;
     const requestBody = {
         "event": {

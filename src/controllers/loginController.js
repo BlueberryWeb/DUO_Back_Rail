@@ -20,7 +20,6 @@ const authenticateUser = () => {
     return (req, res, next) => {
         passport_1.default.authenticate('local', (err, user, info) => __awaiter(void 0, void 0, void 0, function* () {
             try {
-                console.log(req);
                 if (err) {
                     console.error(err);
                     return res.status(500).json({ error: 'Error de autenticación' });
@@ -49,7 +48,6 @@ const authenticateUser = () => {
 };
 exports.authenticateUser = authenticateUser;
 const logout = (req, res) => {
-    console.log(req.sessionID);
     try {
         req.logout((err) => {
             if (err) {
@@ -71,7 +69,6 @@ const logout = (req, res) => {
         });
     }
     catch (passportError) {
-        console.log('error');
         res.status(500).json({ status: 500, message: '', devTool: passportError.message });
         console.log(passportError);
     }
@@ -79,7 +76,6 @@ const logout = (req, res) => {
 exports.logout = logout;
 const validateTokenUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log(req.user);
         if (!req.user) {
             return res.json({
                 status: 401

@@ -16,8 +16,6 @@ exports.FindCity = void 0;
 const axios_1 = __importDefault(require("axios"));
 const FindCity = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { cp } = req.params;
-    console.log(process.env.API_KEY_DIPOMEX);
-    console.log(cp);
     try {
         const response = yield axios_1.default.get(`https://api.tau.com.mx/dipomex/v1/codigo_postal?cp=${cp}`, {
             headers: {
@@ -27,7 +25,6 @@ const FindCity = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.json(response.data);
     }
     catch (err) {
-        console.log('No se a encontrado ninguna ciudad' + err);
         return res.json({ status: 500 });
     }
 });

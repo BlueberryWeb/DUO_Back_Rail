@@ -36,6 +36,7 @@ class PassportConfig {
         })));
         passport_1.default.serializeUser((user, done) => {
             if (user && user.uid) {
+                console.log('Serialize user...');
                 done(null, user.uid);
             }
             else {
@@ -44,6 +45,7 @@ class PassportConfig {
         });
         passport_1.default.deserializeUser((id, done) => __awaiter(this, void 0, void 0, function* () {
             try {
+                console.log('deserialize user...');
                 const user = yield User_1.default.findById(id);
                 if (!user) {
                     return done(null, false);
@@ -55,6 +57,7 @@ class PassportConfig {
                 return done(null, fullUser);
             }
             catch (error) {
+                console.log(`Catch exeption: ${error.message}`);
                 return done(error);
             }
         }));

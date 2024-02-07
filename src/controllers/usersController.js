@@ -116,7 +116,6 @@ exports.addUser = addUser;
 const updatePassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
-        console.log(email);
         const user = yield User_1.default.findOne({ email });
         if (!user) {
             return res.json({

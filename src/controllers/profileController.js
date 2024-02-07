@@ -42,7 +42,6 @@ const getProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const { id_profile } = req.params;
         const profile = yield Profile_1.default.findById({ _id: id_profile });
         if (!profile) {
-            console.log('first');
             return res.json({
                 status: 401,
                 message: 'Perfil no encontrado'
@@ -62,7 +61,6 @@ exports.getProfile = getProfile;
 const addProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const body = req.body;
-        console.log(JSON.stringify(body, null, 2));
         const profile = new Profile_1.default(body);
         profile.save();
         if (profile) {
