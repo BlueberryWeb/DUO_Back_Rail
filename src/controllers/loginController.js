@@ -20,6 +20,7 @@ const authenticateUser = () => {
     return (req, res, next) => {
         passport_1.default.authenticate('local', (err, user, info) => __awaiter(void 0, void 0, void 0, function* () {
             try {
+                console.log(req);
                 if (err) {
                     console.error(err);
                     return res.status(500).json({ error: 'Error de autenticación' });
@@ -29,7 +30,6 @@ const authenticateUser = () => {
                     const errorMessage = info.message || 'No fue posible validar tus credenciales. Por favor, verifícalas e inténtalo de nuevo';
                     return res.status(401).json({ error: errorMessage });
                 }
-                // const userWithAdditionalInfo = await User.findOne({ email: user.email }).select('-password') as UserProps;
                 const userWithAdditionalInfo = yield User_1.default.findUser(user.email);
                 req.logIn(userWithAdditionalInfo, (err) => __awaiter(void 0, void 0, void 0, function* () {
                     if (err) {
@@ -79,8 +79,8 @@ const logout = (req, res) => {
 exports.logout = logout;
 const validateTokenUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        console.log(req.user);
         if (!req.user) {
-            // console.log('object')
             return res.json({
                 status: 401
             });

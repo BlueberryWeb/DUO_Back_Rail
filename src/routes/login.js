@@ -27,7 +27,7 @@ const express_1 = require("express");
 const authController = __importStar(require("../controllers/loginController"));
 const authToken_1 = require("../middleware/Auth/authToken");
 const router = (0, express_1.Router)();
-router.get('/auth', authController.validateTokenUser);
+router.get('/auth', [authToken_1.validToken], authController.validateTokenUser);
 router.get('/logout', [
     authToken_1.validToken
 ], authController.logout);

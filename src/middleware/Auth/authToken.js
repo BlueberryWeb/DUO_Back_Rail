@@ -17,7 +17,6 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const User_1 = __importDefault(require("../../models/User"));
 const validToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const token = req.header('auth-token');
-    console.log(token);
     if (!token) {
         return res.json({
             status: 401,
@@ -36,8 +35,9 @@ const validToken = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
                 message: 'Usuario no encontrado.'
             });
         }
-        req.user = user,
-            next();
+        const fullUser = yield User_1.default.findUser(user.email);
+        req.user = fullUser;
+        next();
     }
     catch (error) {
         res.json({

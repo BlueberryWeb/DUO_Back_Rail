@@ -78,7 +78,7 @@ class Server {
             }),
             cookie: {
                 secure: process.env.NODE_ENV === 'production',
-                httpOnly: false,
+                httpOnly: true,
                 maxAge: 365 * 24 * 60 * 60 * 1000,
                 sameSite: 'none',
             }
@@ -89,10 +89,10 @@ class Server {
     }
     listen() {
         this.app.listen(this.port, () => {
-            console.log(`Server up on ${this.port}`);
             console.log(process.env.NODE_ENV === 'production');
+            console.log(`Server up on ${this.port}`);
         });
     }
 }
 exports.Server = Server;
-//# sourceMappingURL=Server.js.map
+//# sourceMappingURL=server.js.map
