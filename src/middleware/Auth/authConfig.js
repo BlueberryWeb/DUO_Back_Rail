@@ -35,7 +35,7 @@ class PassportConfig {
             }
         })));
         passport_1.default.serializeUser((user, done) => {
-            console.log('entrando');
+            console.log(user);
             if (user && user.uid) {
                 console.log('success');
                 done(null, user.uid);
