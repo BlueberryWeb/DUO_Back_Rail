@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addProfile = exports.getProfile = exports.getProfiles = void 0;
+exports.deleteProfile = exports.updateProfile = exports.addProfile = exports.getProfile = exports.getProfiles = void 0;
 const Profile_1 = __importDefault(require("../models/Profile"));
 const getProfiles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -63,6 +63,7 @@ const addProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const body = req.body;
         const profile = new Profile_1.default(body);
         profile.save();
+        console.log(req.user);
         if (profile) {
             res.json({
                 status: 200,
@@ -76,4 +77,41 @@ const addProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.addProfile = addProfile;
+const updateProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { image, name, likes, id } = req.body;
+        const profile = yield Profile_1.default.findById(id);
+        if (profile) {
+            profile.image = image;
+            profile.likes = likes;
+            profile.name = name;
+            profile.save();
+            console.log(profile);
+            res.json({
+                status: 200,
+                message: 'Perfil actualizado'
+            });
+        }
+    }
+    catch (error) {
+        res.status(500).json({ status: 500, message: '', devTool: error.message });
+        console.log(error);
+    }
+});
+exports.updateProfile = updateProfile;
+const deleteProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        yield Profile_1.default.deleteOne({ _id: id });
+        res.json({
+            status: 200,
+            message: 'Perfil eliminado'
+        });
+    }
+    catch (error) {
+        res.status(500).json({ status: 500, message: '', devTool: error.message });
+        console.log(error);
+    }
+});
+exports.deleteProfile = deleteProfile;
 //# sourceMappingURL=profileController.js.map

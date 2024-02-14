@@ -25,7 +25,7 @@ const findUserByEmail = (req, res) => __awaiter(void 0, void 0, void 0, function
         if (!data) {
             return res.json({
                 status: 400,
-                message: 'Usuario no encontrado. Verifique el correo electrónico y e intentolo de nuevo'
+                message: 'Usuario no encontrado. Verifique el correo electrónico y e inténtalo de nuevo'
             });
         }
         res.json(data);

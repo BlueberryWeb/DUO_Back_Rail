@@ -25,7 +25,6 @@ const ProfileSchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: [true, 'This field is required'],
-        unique: true,
     },
     likes: [{
             type: String,
