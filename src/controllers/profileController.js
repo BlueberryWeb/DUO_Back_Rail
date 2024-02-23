@@ -102,6 +102,7 @@ exports.updateProfile = updateProfile;
 const deleteProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
+        console.log(id);
         yield Profile_1.default.deleteOne({ _id: id });
         res.json({
             status: 200,

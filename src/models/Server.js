@@ -33,6 +33,9 @@ class Server {
             profiles: '/api/profiles',
             health: '/api/health',
             sponsors: '/api/sponsors',
+            avatars: '/api/avatars',
+            categories: '/api/categories',
+            subcategories: '/api/subcategories',
         };
         this.dbConnection();
         this.middleware();
@@ -56,6 +59,9 @@ class Server {
         this.app.use(this.paths.health, require('../routes/health'));
         this.app.use(this.paths.profiles, require('../routes/profiles'));
         this.app.use(this.paths.sponsors, require('../routes/sponsor'));
+        this.app.use(this.paths.avatars, require('../routes/avatar'));
+        this.app.use(this.paths.categories, require('../routes/categories'));
+        this.app.use(this.paths.subcategories, require('../routes/subcategories'));
     }
     middleware() {
         this.app.use((0, cors_1.default)());
