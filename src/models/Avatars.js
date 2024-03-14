@@ -26,7 +26,7 @@ const AvatarsSchema = new mongoose_1.Schema({
         required: [true, 'This field is required']
     },
     description: {
-        type: Number,
+        type: String,
         required: [true, 'This field is required']
     },
 });

@@ -10,8 +10,8 @@ router.get('/all-profiles/:id', [
     authToken_1.validToken
 ], profileController_1.getProfiles);
 router.get('/single-profile/:id_profile', [
-    authValidate_1.isAuthenticated,
-    authToken_1.validToken
+// isAuthenticated,
+// validToken
 ], profileController_1.getProfile);
 router.post('/save-profile', [authToken_1.validToken], profileController_1.addProfile);
 router.post('/update-profile', [authToken_1.validToken], profileController_1.updateProfile);

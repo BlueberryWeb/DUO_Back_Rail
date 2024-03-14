@@ -26,7 +26,7 @@ const UserSchema = new mongoose_1.Schema({
         type: String,
         required: [true, 'This field is required'],
     },
-    lastname: {
+    last_name: {
         type: String,
         required: false,
     },
@@ -43,7 +43,11 @@ const UserSchema = new mongoose_1.Schema({
         type: String,
         required: [true, 'This field is required'],
     },
-    rol: {
+    role: {
+        type: String,
+        required: [true, 'This field is required'],
+    },
+    status: {
         type: String,
         required: [true, 'This field is required'],
     },
@@ -60,13 +64,22 @@ UserSchema.methods.toJSON = function () {
     return user;
 };
 // Scopes //
-UserSchema.statics.findByEmail = function (email) {
+UserSchema.statics.verifyUserExistence = function (email) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = yield this.findOne({ email: email });
         if (!user) {
             return { status: 404 };
         }
         return { status: 200 };
+    });
+};
+UserSchema.statics.allUser = function () {
+    return __awaiter(this, void 0, void 0, function* () {
+        const users = yield this.find().select('-password -createdAt -updatedAt -stripeCustomerId');
+        if (!users) {
+            return { status: 201, message: 'There is no data to load' };
+        }
+        return users;
     });
 };
 UserSchema.statics.findUser = function (email) {

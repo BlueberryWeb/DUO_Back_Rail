@@ -1,12 +1,12 @@
 {
-  "name": "Duo_back",
+  "name": "duo_back",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon App.ts && npm install --omit=dev",
-    "start": "node App.js && npm install --omit=dev",
+    "start": "node App.js",
     "tsc": "tsc",
     "build": "npm install --omit=dev"
   },
@@ -21,6 +21,7 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/cookie-parser": "^1.4.6",
     "@types/cors": "^2.8.17",
+    "@types/crypto-js": "^4.2.2",
     "@types/express": "^4.17.21",
     "@types/express-session": "^1.17.10",
     "@types/jsonwebtoken": "^9.0.5",
@@ -44,6 +45,8 @@
     "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
+    "currency-converter-lt": "^2.0.1",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "esm": "^3.2.25",

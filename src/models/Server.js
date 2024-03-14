@@ -94,6 +94,9 @@ class Server {
         authConfig_1.default.initializePassport();
     }
     listen() {
+        this.app.get('/', (req, res) => {
+            res.send('¡OK!');
+        });
         this.app.listen(this.port, () => {
             console.log(`Server up on ${this.port}`);
         });

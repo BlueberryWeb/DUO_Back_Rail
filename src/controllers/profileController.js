@@ -86,7 +86,6 @@ const updateProfile = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             profile.likes = likes;
             profile.name = name;
             profile.save();
-            console.log(profile);
             res.json({
                 status: 200,
                 message: 'Perfil actualizado'

@@ -12,8 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAvatars = void 0;
+exports.Test = exports.getAvatars = void 0;
 const Avatars_1 = __importDefault(require("../models/Avatars"));
+const encrypt_1 = require("../helpers/encrypt");
 const getAvatars = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const avatars = yield Avatars_1.default.find();
@@ -31,4 +32,17 @@ const getAvatars = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.getAvatars = getAvatars;
+const Test = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const word = 'Hello word, this is a sample';
+        const key = 'gjdfoK7aF2PAb8edPY9FbeHHVA9y0VMUJZsaTpV5b3bJCXJ8SSzTnc3YjkdiF9tk5TmlSSM8SZPd9a1ZmtSE';
+        const new_text = (0, encrypt_1.encryptData)(word, key);
+        res.json(new_text);
+    }
+    catch (error) {
+        res.status(500).json({ status: 500, message: 'Error interno de servidor', devTool: error.message });
+        console.log(error);
+    }
+});
+exports.Test = Test;
 //# sourceMappingURL=avatarController.js.map
